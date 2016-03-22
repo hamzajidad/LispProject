@@ -1,3 +1,5 @@
+package jus.aoo.Lisp.kernel;
+
 
 public class SCons implements List{
 	private SExpr car;
@@ -17,7 +19,7 @@ public class SCons implements List{
 	public SExpr cdr(){return cdr;}
 	public boolean isList(){ return true;}
 	public boolean isAtom(){ return false;}
-	public boolean isNill(){ return false;}
+	public boolean isNil(){ return false;}
 	
 	public String toString(){
 		SExpr courant = new SCons(this);

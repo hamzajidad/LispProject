@@ -7,9 +7,14 @@ public interface SExpr {
 			public boolean isList();
 		  
 			public boolean isNil();
-
-			public String toString();
 			
-			public void eval() ;
-
+			public SExpr eval() ;
+			
+			public boolean eq(SExpr expression);			
+			
+			public SExpr car();
+			
+			public SExpr cdr();
+			
+			public String toString();
 }

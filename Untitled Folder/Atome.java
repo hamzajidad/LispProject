@@ -3,7 +3,7 @@ package jus.aoo.Lisp.kernel;
 public abstract class Atome implements SExpr{
 
 	
-	public boolean isAtome(){
+	public boolean isAtom(){
 		return true;
 	}
 	
@@ -16,20 +16,14 @@ public abstract class Atome implements SExpr{
 		return false;
 	}
 	
-	public boolean eq(SExpr){
+	public boolean eq(SExpr expression){
 		return false;
 	}
 	
 	
-	public SExpr car(){
-		
-	}
-	
-	public SExpr cdr(){
-		
-	}
 	
 	public String toString(){
+		return "";
 		
 	}
 
