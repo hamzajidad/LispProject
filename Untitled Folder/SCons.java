@@ -17,18 +17,21 @@ public class SCons implements List{
 
 	public SExpr car(){return car;}
 	public SExpr cdr(){return cdr;}
-	public boolean isList(){ return true;}
-	public boolean isAtom(){ return false;}
-	public boolean isNil(){ return false;}
+	@Override public boolean isList(){ return true;}
+	@Override public boolean isAtom(){ return false;}
+	@Override public boolean isNil(){ return false;}
+	@Override public boolean isCons(){return true;}
+
 	
 	public String toString(){
-		SExpr courant = new SCons(this);
+		SExpr courant = this;
 		String chaine = "(";
-		while(!(courant.cdr().isAtom())){
-			chaine += courant.car().toString()+" ";
+		while((courant.isCons())){
+			chaine += courant.car().toString();
 			courant = courant.cdr();
 		}
-		return chaine += courant.car().toString()+"."+courant.cdr().toString()+")";
+		if(courant.isNil())return chaine +=")";
+		return chaine += " . "+ courant.toString() +")";
 	}
 	
 	public SExpr eval(){

@@ -17,4 +17,6 @@ public interface SExpr {
 			public SExpr cdr();
 			
 			public String toString();
+
+			public boolean isCons();
 }
