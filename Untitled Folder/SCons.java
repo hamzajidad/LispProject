@@ -27,22 +27,40 @@ public class SCons implements List{
 		SExpr courant = this;
 		String chaine = "(";
 		while((courant.isCons())){
-			chaine += courant.car().toString();
+			chaine += courant.car().toString()+ " ";
 			courant = courant.cdr();
 		}
 		if(courant.isNil())return chaine +=")";
 		return chaine += " . "+ courant.toString() +")";
 	}
-	
+
 	public SExpr eval(){
-		SExpr evaluation = new SCons(car().eval(),cdr().eval());
-		return evaluation;
+		SExpr foncteur = this.car();
+		SExpr fonction = foncteur.eval();
+		if (fonction.isPrimitive()){
+			return ((Primitive)fonction).reduction(fonction,cdr());
+		}else{
+			if (fonction.car().toString() == "lambda"){
+				Expr lambda = new Expr();
+				return lambda.reduction(fonction, this.cdr);
+			}
+			else if (fonction.car().toString() == "flambda"){
+				FExpr flambda = new FExpr();
+				return flambda.reduction(fonction, this.cdr);
+			}
+			else throw new LispException("ERREUR");
+		}
 	}
 
 	public boolean eq(SExpr exp) {
 		if (!(exp.isList())){
 			return(this.car().eq(exp.car()) && this.cdr().eq(exp.cdr()));
 		}
+		return false;
+	}
+
+	@Override
+	public boolean isPrimitive() {
 		return false;
 	}
 }

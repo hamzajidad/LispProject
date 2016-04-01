@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Symbole extends Atome {
 	private static Map<String,Symbole> symboles = new HashMap<>();
+	
 	public static Symbole newSymbole(String s){
 		if(symboles.containsKey(s)) return symboles.get(s);
 		Symbole x = new Symbole(s);

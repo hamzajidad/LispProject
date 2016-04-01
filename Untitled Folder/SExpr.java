@@ -19,4 +19,6 @@ public interface SExpr {
 			public String toString();
 
 			public boolean isCons();
+			
+			public boolean isPrimitive();
 }

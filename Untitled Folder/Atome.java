@@ -10,5 +10,6 @@ public abstract class Atome implements SExpr{
 	@Override public SExpr car() { throw new LispException("car non applicable à un atome");}
 	@Override public SExpr cdr() { throw new LispException("cdr non applicable à un atome");}
 	@Override public boolean isCons(){return false;}
+	public boolean isPrimitive(){ return false;}
 	
 }
