@@ -10,20 +10,19 @@ public Reader(){}
     public static void main(String args []) throws ParseException  {    /*Reader parser = new Reader(System.in);
     System.out.println(parser.SEXPR());*/
     Reader parser  = new Reader();
-    System.out.println(reader.read());
+    System.out.println(Reader.read());
      }
 
- public SExpr read() throws ParseException  {	Reader parser = new Reader(System.in);
+ public static SExpr read() throws ParseException  {	Reader parser = new Reader(System.in);
 	return parser.SEXPR();
  }
 
-  public SExpr read(String s) throws ParseException 
+  public static SExpr read(String s) throws ParseException 
  {
 	Reader parser = new Reader(new StringReader(s));
 	return parser.SEXPR();
  }
- 
- 
+
 }
 
 PARSER_END(Reader)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{

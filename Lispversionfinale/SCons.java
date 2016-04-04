@@ -27,7 +27,7 @@ public class SCons implements List{
 		SExpr courant = this;
 		String chaine = "(";
 		while((courant.isCons())){
-			chaine += courant.car().toString()+ " ";
+			chaine += courant.car().toString()+" ";
 			courant = courant.cdr();
 		}
 		if(courant.isNil())return chaine +=")";
