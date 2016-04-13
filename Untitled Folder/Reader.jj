@@ -1,0 +1,37 @@
+/**
+ * JavaCC template file created by SF JavaCC plugin 1.5.28+ wizard for JavaCC 1.5.0+
+ */options{  static = true;}PARSER_BEGIN(Reader)package jus.aoo.Lisp.kernel;
+
+public class Reader{  public static void main(String args []) throws ParseException  {    Reader parser = new Reader(System.in);
+    System.out.println(parser.SEXPR()); }
+ 
+}
+
+PARSER_END(Reader)SKIP :{  " "| "\r"| "\t"| "\n"}TOKEN : /* OPERATORS */{
+  < PARENTHESEOUVRANTE  : "(" >
+| < PARENTHESEFERMANTE  : ")" >
+| < POINT : ".">
+| < QUOTE : "'" >}TOKEN :{  < IDF : (< DIGIT >|< LETTER >)+ >| < #DIGIT : [ "0"-"9" ] >| < #LETTER : [ "a"-"z" ]|[ "A"-"Z" ] >
+}SExpr SEXPR() :{SExpr e;}{  e=ATOM(){return e;}
+  | < PARENTHESEOUVRANTE > e=LIST() < PARENTHESEFERMANTE >{return e;}
+  |	< QUOTE > e=SEXPR(){return new SCons(Symbole.newSymbole("quote"),e);}}
+
+SExpr ATOM() :
+{SExpr e;}
+{
+  e=SYMBOLE(){return e;}
+}
+
+SExpr LIST() :
+{SExpr e1,e2;}
+{
+  
+	e1=SEXPR() (< POINT > e2=SEXPR() | e2=LIST()){return new SCons(e1,e2);}
+	|{return Nil.NIL;}
+  
+}
+SExpr SYMBOLE() :
+{Token t;}
+{
+	t=< IDF >{return Symbole.newSymbole(t.image);}
+}
